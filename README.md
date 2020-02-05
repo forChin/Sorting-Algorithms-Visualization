@@ -16,4 +16,3 @@ You can choose one of 8 sorting algorithms:
 
 ## Size and speed
 There isn't speed slider, because it is unnecessary when you can resize pixels by scrolling mouse wheel. The smaller the pixels, the longer they sort.
-![out3](https://user-images.githubusercontent.com/49096838/73840053-8afafc80-4841-11ea-92c4-dfab238b2cbb.gif)
