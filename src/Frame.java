@@ -81,7 +81,6 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 		browseBtn.setVisible(true);
 		browseBtn.setFocusable(false);
 		browseBtn.addActionListener((e) -> {
-			System.out.println(1);
 			FileDialog fd = new FileDialog(w, "Choose an image", FileDialog.LOAD);
 			
 			fd.setFilenameFilter((dir, name) -> name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
@@ -97,7 +96,7 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 				if(t.isRunning()) {
 					t.stop();					
 				}
-				startBtn.setText("start");
+				startBtn.setText("shuffle");
 				
 				int newWidth = img.getImage().getWidth() - img.getImage().getWidth()%size;
 				int newHeight = img.getImage().getHeight() - img.getImage().getHeight()%size;

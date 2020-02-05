@@ -29,7 +29,6 @@ public class Image {
 		}
 
 		generatePixels(size);
-		shuffle();
 	}
 	
 	public void shuffle() {
