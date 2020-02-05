@@ -1,6 +1,10 @@
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/* Sorts.java contains sorting methods for 
+ * sorting the image by id
+ */
+
 public class Sorts {
 	
 	public static void bubbleSort(ArrayList<Pixel> pixels) {
@@ -9,14 +13,14 @@ public class Sorts {
 				Pixel left = pixels.get(j-1);
 				Pixel right = pixels.get(j);
 				
-				if (left.getPosition() > right.getPosition()) {
-					int tempPosition = left.getPosition();
+				if (left.getID() > right.getID()) {
+					int tempPosition = left.getID();
 					BufferedImage subimg = left.getSubimage();
 					
-					left.setPosition(right.getPosition());
+					left.setID(right.getID());
 					left.setSubimage(right.getSubimage());
 					
-					right.setPosition(tempPosition);
+					right.setID(tempPosition);
 					right.setSubimage(subimg);
 					
 					return;
@@ -27,18 +31,18 @@ public class Sorts {
 	
 	public static void insertionSort(ArrayList<Pixel> pixels) {		
         for (int i = 1; i < pixels.size(); ++i) { 
-            int tempPos = pixels.get(i).getPosition();
+            int tempPos = pixels.get(i).getID();
             BufferedImage tempImg = pixels.get(i).getSubimage();
             int j = i - 1;
   
-            while (j >= 0 && pixels.get(j).getPosition() > tempPos) { 
-                pixels.get(j + 1).setPosition(pixels.get(j).getPosition());
+            while (j >= 0 && pixels.get(j).getID() > tempPos) { 
+                pixels.get(j + 1).setID(pixels.get(j).getID());
                 pixels.get(j + 1).setSubimage(pixels.get(j).getSubimage());                
                 j--;
             }
             
             if(i != j + 1) {
-                pixels.get(j + 1).setPosition(tempPos);
+                pixels.get(j + 1).setID(tempPos);
                 pixels.get(j + 1).setSubimage(tempImg);
                 return;
             }
@@ -47,26 +51,26 @@ public class Sorts {
 
     public static void quickSort(int low, int high, ArrayList<Pixel> numbers) {
         int i = low, j = high;
-        int pivot = numbers.get((low + high)/2).getPosition();
+        int pivot = numbers.get((low + high)/2).getID();
 
         while (i <= j) {
         	
-            while (numbers.get(i).getPosition() < pivot && i < high) {
+            while (numbers.get(i).getID() < pivot && i < high) {
                 i++;
             }
             
-            while (numbers.get(j).getPosition() > pivot && j > low) {
+            while (numbers.get(j).getID() > pivot && j > low) {
                 j--;
             }
 
             if (i <= j) {
-            	int tempPos = numbers.get(i).getPosition();
+            	int tempPos = numbers.get(i).getID();
             	BufferedImage tempSubimg = numbers.get(i).getSubimage();
             	
-                numbers.get(i).setPosition(numbers.get(j).getPosition());
+                numbers.get(i).setID(numbers.get(j).getID());
                 numbers.get(i).setSubimage(numbers.get(j).getSubimage());
                 
-                numbers.get(j).setPosition(tempPos);
+                numbers.get(j).setID(tempPos);
                 numbers.get(j).setSubimage(tempSubimg);
                 i++;
                 j--;
@@ -92,19 +96,19 @@ public class Sorts {
         for (int i = 0; i < n-1; i++) { 
             int min_idx = i;
             for (int j = i+1; j < n; j++) {
-                if (pixels.get(j).getPosition() < pixels.get(min_idx).getPosition()) {
+                if (pixels.get(j).getID() < pixels.get(min_idx).getID()) {
                     min_idx = j;                	
                 }            	
             }
   
             if(min_idx != i) {
-                int tempPos = pixels.get(min_idx).getPosition();
+                int tempPos = pixels.get(min_idx).getID();
                 BufferedImage tempImg = pixels.get(min_idx).getSubimage();
                 
-                pixels.get(min_idx).setPosition(pixels.get(i).getPosition());
+                pixels.get(min_idx).setID(pixels.get(i).getID());
                 pixels.get(min_idx).setSubimage(pixels.get(i).getSubimage());
                 
-                pixels.get(i).setPosition(tempPos);
+                pixels.get(i).setID(tempPos);
                 pixels.get(i).setSubimage(tempImg);
             	return;
             }
@@ -116,16 +120,16 @@ public class Sorts {
   
         for (int gap = n/2; gap > 0; gap /= 2) { 
             for (int i = gap; i < n; i += 1) { 
-                int temp = arr.get(i).getPosition();
+                int temp = arr.get(i).getID();
                 BufferedImage tempImg = arr.get(i).getSubimage();
   
                 int j; 
                 for (j = i; j >= gap; j -= gap) {
-                	if(arr.get(j - gap).getPosition() > temp) {
+                	if(arr.get(j - gap).getID() > temp) {
     	                arr.get(j).setSubimage(arr.get(j - gap).getSubimage());
-                    	arr.get(j).setPosition(arr.get(j - gap).getPosition());
+                    	arr.get(j).setID(arr.get(j - gap).getID());
                     	
-                        arr.get(j-gap).setPosition(temp); 
+                        arr.get(j-gap).setID(temp); 
                         arr.get(j-gap).setSubimage(tempImg);
                         
                     	return;
@@ -133,7 +137,7 @@ public class Sorts {
                 	break;
                 }
                 
-                arr.get(j).setPosition(temp); 
+                arr.get(j).setID(temp); 
                 arr.get(j).setSubimage(tempImg);
             }
         } 
@@ -144,14 +148,14 @@ public class Sorts {
         int end = pixels.size(); 
   
         for (int i = start; i < end - 1; ++i) { 
-            if (pixels.get(i).getPosition() > pixels.get(i + 1).getPosition()) { 
-                int temp = pixels.get(i).getPosition(); 
+            if (pixels.get(i).getID() > pixels.get(i + 1).getID()) { 
+                int temp = pixels.get(i).getID(); 
                 BufferedImage tempImg = pixels.get(i).getSubimage(); 
                 
-                pixels.get(i).setPosition(pixels.get(i + 1).getPosition()); 
+                pixels.get(i).setID(pixels.get(i + 1).getID()); 
                 pixels.get(i).setSubimage(pixels.get(i + 1).getSubimage()); 
                 
-                pixels.get(i + 1).setPosition(temp); 
+                pixels.get(i + 1).setID(temp); 
                 pixels.get(i + 1).setSubimage(tempImg); 
             }
         }
@@ -159,14 +163,14 @@ public class Sorts {
         end--;
   
         for (int i = end - 1; i >= start; i--) { 
-            if (pixels.get(i).getPosition() > pixels.get(i + 1).getPosition()) {
-                int temp = pixels.get(i).getPosition(); 
+            if (pixels.get(i).getID() > pixels.get(i + 1).getID()) {
+                int temp = pixels.get(i).getID(); 
                 BufferedImage tempImg = pixels.get(i).getSubimage(); 
                 
-                pixels.get(i).setPosition(pixels.get(i + 1).getPosition()); 
+                pixels.get(i).setID(pixels.get(i + 1).getID()); 
                 pixels.get(i).setSubimage(pixels.get(i + 1).getSubimage()); 
                 
-                pixels.get(i + 1).setPosition(temp); 
+                pixels.get(i + 1).setID(temp); 
                 pixels.get(i + 1).setSubimage(tempImg); 
                 return;
             }
@@ -191,12 +195,12 @@ public class Sorts {
         ArrayList<BufferedImage> Rimg = new ArrayList<>(n2);
   
         for (int i=0; i<n1; ++i) {
-            L[i] = pixels.get(l + i).getPosition();
+            L[i] = pixels.get(l + i).getID();
         	Limg.add(i, pixels.get(l + i).getSubimage());        	
         }
         
         for (int j=0; j<n2; ++j) {
-            R[j] = pixels.get(m + 1+ j).getPosition();         	
+            R[j] = pixels.get(m + 1+ j).getID();         	
         	Rimg.add(j, pixels.get(m + 1 + j).getSubimage());        	
         }
   
@@ -206,12 +210,12 @@ public class Sorts {
         int k = l; 
         while (i < n1 && j < n2) {
             if (L[i] <= R[j]) { 
-                pixels.get(k).setPosition(L[i]);
+                pixels.get(k).setID(L[i]);
                 pixels.get(k).setSubimage(Limg.get(i));
                 i++; 
                 k++;
             } else { 
-                pixels.get(k).setPosition(R[j]);
+                pixels.get(k).setID(R[j]);
                 pixels.get(k).setSubimage(Rimg.get(j));
                 j++;
                 k++;
@@ -220,14 +224,14 @@ public class Sorts {
         } 
   
         while (i < n1) { 
-            pixels.get(k).setPosition(L[i]);
+            pixels.get(k).setID(L[i]);
             pixels.get(k).setSubimage(Limg.get(i));
             i++;
             k++; 
         } 
   
         while (j < n2) { 
-            pixels.get(k).setPosition(R[j]);
+            pixels.get(k).setID(R[j]);
             pixels.get(k).setSubimage(Rimg.get(j));
             j++; 
             k++; 

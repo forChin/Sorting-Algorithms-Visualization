@@ -6,6 +6,11 @@ import java.util.Collections;
 
 import javax.imageio.ImageIO;
 
+/* Image.java is an object, 
+ * which contains information about the image 
+ * and crops the image into pixels
+ */
+
 public class Image {
 	private int width, height;
 	private BufferedImage image;
@@ -37,20 +42,20 @@ public class Image {
 		return pixels;
 	}
 	
+	// generate subimages from original image
 	public void generatePixels(int size) {
 		pixels.clear();
 		
 		for(int i = 0; i < height - height%size; i += size) {
-			ArrayList<Pixel> a = new ArrayList<>();
+			ArrayList<Pixel> row = new ArrayList<>();
 			for (int j = 0; j < width - width%size; j += size) {
-				a.add(new Pixel(j, image.getSubimage(j,  i, size, size)));
+				row.add(new Pixel(j, image.getSubimage(j,  i, size, size)));
 			}
-			pixels.add(a);
+			pixels.add(row);
 		}
 	}
 
 	public BufferedImage getImage() {
 		return image;
 	}
-	
 }

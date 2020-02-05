@@ -33,12 +33,12 @@ class MergeSort {
       
             /*Copy data to temp arrays*/
             for (int i=0; i<n1; ++i) {
-                L[i] = arr.get(l + i).getPosition();
+                L[i] = arr.get(l + i).getID();
             	Limg.add(i, arr.get(l + i).getSubimage());        	
             }
             
             for (int j=0; j<n2; ++j) {
-                R[j] = arr.get(m + 1+ j).getPosition();         	
+                R[j] = arr.get(m + 1+ j).getID();         	
             	Rimg.add(j, arr.get(m + 1 + j).getSubimage());        	
             }
       
@@ -52,12 +52,12 @@ class MergeSort {
             int k = l; 
             while (i < n1 && j < n2) { 
                 if (L[i] <= R[j]) { 
-                    arr.get(k).setPosition(L[i]);
+                    arr.get(k).setID(L[i]);
                     arr.get(k).setSubimage(Limg.get(i));
                     i++; 
                     k++;
                 } else { 
-                    arr.get(k).setPosition(R[j]);
+                    arr.get(k).setID(R[j]);
                     arr.get(k).setSubimage(Rimg.get(j));
                     j++;
                     k++;
@@ -67,7 +67,7 @@ class MergeSort {
       
             /* Copy remaining elements of L[] if any */
             while (i < n1) { 
-                arr.get(k).setPosition(L[i]);
+                arr.get(k).setID(L[i]);
                 arr.get(k).setSubimage(Limg.get(i));
                 i++;
                 k++; 
@@ -75,7 +75,7 @@ class MergeSort {
       
             /* Copy remaining elements of R[] if any */
             while (j < n2) { 
-                arr.get(k).setPosition(R[j]);
+                arr.get(k).setID(R[j]);
                 arr.get(k).setSubimage(Rimg.get(j));
                 j++; 
                 k++; 

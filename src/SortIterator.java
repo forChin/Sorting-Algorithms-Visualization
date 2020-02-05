@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 
+/* SortIterator.java sorts every row of the image
+ * by selected sorting method
+ */
+
 public class SortIterator {
 	private boolean random, bubble, cocktail, quick, 
 						insertion, selection, merge, shell;
-	private ArrayList<ArrayList<Pixel>> array;
+	private ArrayList<ArrayList<Pixel>> pixels;
 	
 	
 	SortIterator() {
@@ -17,31 +21,31 @@ public class SortIterator {
 		random = false;
 	}
 	
-	public void sort(ArrayList<ArrayList<Pixel>> array) {
-		this.array = array;
+	public void sort(ArrayList<ArrayList<Pixel>> pixels) {
+		this.pixels = pixels;
 		
-		for(int i = 0; i < array.size(); i++) {
+		for(int i = 0; i < pixels.size(); i++) {
 			if(bubble) {
-				Sorts.bubbleSort(array.get(i));
+				Sorts.bubbleSort(pixels.get(i));
 			} else if(merge) {
-				Sorts.mergeSort(array.get(i), 0, array.get(i).size()-1);
+				Sorts.mergeSort(pixels.get(i), 0, pixels.get(i).size()-1);
 			} else if (quick) {
-				Sorts.quickSort(0, array.get(i).size()-1, array.get(i));
+				Sorts.quickSort(0, pixels.get(i).size()-1, pixels.get(i));
 			} else if(insertion) {
-				Sorts.insertionSort(array.get(i));
+				Sorts.insertionSort(pixels.get(i));
 			} else if(shell) {
-				Sorts.shellSort(array.get(i));
+				Sorts.shellSort(pixels.get(i));
 			} else if(selection) {
-				Sorts.selectionSort(array.get(i));
+				Sorts.selectionSort(pixels.get(i));
 			} else if(cocktail) {
-				Sorts.cocktailSort(array.get(i));
+				Sorts.cocktailSort(pixels.get(i));
 			} else if(random) {
-				Sorts.randomSort(array.get(i));
+				Sorts.randomSort(pixels.get(i));
 			}
 		}
 	}
 	
-	public void setSort(String sortMethod) {
+	public void setSortingMethod(String sortingMethod) {
 		cocktail = false;
 		shell = false;
 		bubble = false;
@@ -51,29 +55,29 @@ public class SortIterator {
 		selection = false;
 		random = false;
 		
-		if(sortMethod.equals("Bubble sort")) {
+		if(sortingMethod.equals("Bubble sort")) {
 			bubble = true;
-		} else if (sortMethod.equals("Merge sort")) {
+		} else if (sortingMethod.equals("Merge sort")) {
 			merge = true;
-		} else if (sortMethod.equals("Quick sort")) {
+		} else if (sortingMethod.equals("Quick sort")) {
 			quick = true;
-		} else if (sortMethod.equals("Insertion sort")) {
+		} else if (sortingMethod.equals("Insertion sort")) {
 			insertion = true;
-		} else if (sortMethod.equals("Shell sort")) {
+		} else if (sortingMethod.equals("Shell sort")) {
 			shell = true;
-		} else if (sortMethod.equals("Cocktail sort")) {
+		} else if (sortingMethod.equals("Cocktail sort")) {
 			cocktail = true;
-		} else if(sortMethod.equals("Selection sort")) {
+		} else if(sortingMethod.equals("Selection sort")) {
 			selection = true;
-		} else if(sortMethod.equals("Randomly")) {
+		} else if(sortingMethod.equals("Randomly")) {
 			random = true;
 		}
 	}
 	
 	public boolean isSorted() {
-		for(int i = 0; i < array.size(); i++) {
-			for(int j = 1; j < array.get(i).size(); j++) {
-				if(array.get(i).get(j-1).getPosition() > array.get(i).get(j).getPosition()) {
+		for(int i = 0; i < pixels.size(); i++) {
+			for(int j = 1; j < pixels.get(i).size(); j++) {
+				if(pixels.get(i).get(j-1).getID() > pixels.get(i).get(j).getID()) {
 					return false;
 				}
 			}

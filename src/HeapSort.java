@@ -4,33 +4,33 @@ import java.util.ArrayList;
 public class HeapSort {
 	
     static int partition(ArrayList<Pixel> arr, int low, int high) { 
-        int pivot = arr.get(high).getPosition(); 
+        int pivot = arr.get(high).getID(); 
   
         // index of smaller element 
         int i = (low - 1); 
         for (int j = low; j <= high - 1; j++) { 
             // If current element is smaller than or 
             // equal to pivot 
-            if (arr.get(j).getPosition() <= pivot) { 
+            if (arr.get(j).getID() <= pivot) { 
                 i++; 
   
                 // swap arr[i] and arr[j] 
-                int temp = arr.get(i).getPosition();
+                int temp = arr.get(i).getID();
                 BufferedImage tempImg = arr.get(i).getSubimage();
-                arr.get(i).setPosition(arr.get(j).getPosition()); 
+                arr.get(i).setID(arr.get(j).getID()); 
                 arr.get(i).setSubimage(arr.get(j).getSubimage()); 
-                arr.get(j).setPosition(temp); 
+                arr.get(j).setID(temp); 
                 arr.get(j).setSubimage(tempImg);
                 return -1;
             } 
         } 
   
         // swap arr[i+1] and arr[high] (or pivot) 
-        int temp = arr.get(i + 1).getPosition();
+        int temp = arr.get(i + 1).getID();
         BufferedImage tempImg = arr.get(i + 1).getSubimage();
-        arr.get(i + 1).setPosition(arr.get(high).getPosition());
+        arr.get(i + 1).setID(arr.get(high).getID());
         arr.get(i + 1).setSubimage(arr.get(high).getSubimage()); 
-        arr.get(high).setPosition(temp); 
+        arr.get(high).setID(temp); 
         arr.get(high).setSubimage(tempImg); 
   
         return i + 1; 

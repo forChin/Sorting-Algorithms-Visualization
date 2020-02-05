@@ -1,11 +1,15 @@
 import java.awt.image.BufferedImage;
 
+/* Pixel.java is an object used to represent
+ * every subimage of the browsed image.
+ */
+
 public class Pixel {
-	private int position;
+	private int id;
 	private BufferedImage subimage;
 	
-	public Pixel(int position, BufferedImage subimage) {
-		this.position = position;
+	public Pixel(int id, BufferedImage subimage) {
+		this.id = id;
 		this.subimage = subimage;
 	}
 
@@ -13,12 +17,12 @@ public class Pixel {
 		return subimage;
 	}
 	
-	public int getPosition() {
-		return position; 
+	public int getID() {
+		return id; 
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
+	public void setID(int position) {
+		this.id = position;
 	}
 	
 	public void setSubimage(BufferedImage subimage) {

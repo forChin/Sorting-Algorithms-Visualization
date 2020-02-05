@@ -11,13 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+/* The main graphics class.
+ */
+
 public class Frame extends JPanel implements ActionListener, MouseWheelListener {
 	private int size, width, height;
 	private SortIterator iter;
 	private JFrame w;
 	private Timer t;
 	private JButton startBtn, browseBtn;
-	private JComboBox<String> sortsBox;
+	private JComboBox<String> sortingMethodsBox;
 	private Image img;
 	
 	public static void main(String[] args) {
@@ -42,7 +45,10 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 		
 		addMouseWheelListener(this);
 		
+		// setup all buttons and checkbox
 		setupAll();
+		
+		add(browseBtn);
 		
 		w = new JFrame("Sorting Algorithms Visualization");
 		w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,23 +68,27 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 		
 		String sortMethods[] = {"Bubble sort", "Insertion sort", "Quick sort", "Selection sort", 
 							"Cocktail sort", "Merge sort", "Shell sort", "Randomly"};
-		sortsBox = new JComboBox<>(sortMethods);
-		sortsBox.setFocusable(false);
-		sortsBox.addItemListener((n) -> {
-			iter.setSort((String) sortsBox.getSelectedItem());
-			sortsBox.setPopupVisible(false);
+		sortingMethodsBox = new JComboBox<>(sortMethods);
+		sortingMethodsBox.setFocusable(false);
+		sortingMethodsBox.addItemListener((n) -> {
+			iter.setSortingMethod((String) sortingMethodsBox.getSelectedItem());
+			sortingMethodsBox.setPopupVisible(false);
 		});
-		sortsBox.setVisible(true);
+		sortingMethodsBox.setVisible(true);
 		
 		browseBtn = new JButton("Browse image");
 		browseBtn.setMargin(new Insets(0, 0, 0, 0));
 		browseBtn.setVisible(true);
 		browseBtn.setFocusable(false);
 		browseBtn.addActionListener((e) -> {
+			System.out.println(1);
 			FileDialog fd = new FileDialog(w, "Choose an image", FileDialog.LOAD);
+			
 			fd.setFilenameFilter((dir, name) -> name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
-			fd.setVisible(true);
+            fd.setVisible(true);
+
 			String filename = fd.getFile();
+			
 			if (filename != null) {
 				String path = fd.getDirectory() + fd.getFile();
 				
@@ -97,30 +107,32 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 				
 			    setPreferredSize(new Dimension(width, height));
 				
-        		add(sortsBox);
+        		add(sortingMethodsBox);
         		add(startBtn);
                 revalidate();
-                
                 w.pack();
         		w.setLocationRelativeTo(null);
         		
                 repaint();
 			}
 		});
-		add(browseBtn);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		// if image is selected
 		if(img != null) {
+			
+			//draw shuffled subimages
 			for(int i = 0; i < img.getPixels().size(); i++) {
 				for(int j = 0; j < img.getPixels().get(i).size(); j++) {
 					g.drawImage(img.getPixels().get(i).get(j).getSubimage(), j*size, i*size, null);
 				}
 			}
 			
+			//draw background for menu
 			g.setColor(new Color(0, 0, 0, 170));
 			g.fillRect(0, 0, 310, 40);
 		}
@@ -161,6 +173,7 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 	public void actionPerformed(ActionEvent arg0) {
 		String value = arg0.getActionCommand();
 		
+		// check if method is called by timer or buttons
 		if (value == null) {
 			
 			if(iter.isSorted()) {
