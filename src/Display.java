@@ -14,7 +14,7 @@ import javax.swing.Timer;
 /* The main graphics class.
  */
 
-public class Frame extends JPanel implements ActionListener, MouseWheelListener {
+public class Display extends JPanel implements ActionListener, MouseWheelListener {
 	private int size, width, height;
 	private SortIterator iter;
 	private JFrame w;
@@ -25,11 +25,11 @@ public class Frame extends JPanel implements ActionListener, MouseWheelListener 
 	
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			new Frame();
+			new Display();
 		});
 	}
 	
-	Frame() {
+	Display() {
 		size = 15;
 		width = 117;
 		height = 34;
