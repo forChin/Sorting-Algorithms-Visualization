@@ -133,7 +133,9 @@ public class Display extends JPanel implements ActionListener, MouseWheelListene
 			
 			//draw background for menu
 			g.setColor(new Color(0, 0, 0, 170));
-			g.fillRect(0, 0, 310, 40);
+			int backgroundWidth = startBtn.getPreferredSize().width + browseBtn.getPreferredSize().width +
+									sortingMethodsBox.getPreferredSize().width + 20;
+			g.fillRect(0, 0, backgroundWidth, 40);
 		}
 	}
 
